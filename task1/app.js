@@ -56,16 +56,25 @@ app.get(`/api`, async (req, res) => {
   const day = getDayString(Number(date.getDay()));
 
   //get UTC time and check if its within the valid range
-  const utcTime = getUtcTimeWithValidation(date, 2);
-  console.log(utcTime);
+  const formattedUtcTime = `${date.getUTCFullYear()}-${(date.getUTCMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${date.getUTCDate().toString().padStart(2, "0")}T${date
+    .getUTCHours()
+    .toString()
+    .padStart(2, "0")}:${date
+    .getUTCMinutes()
+    .toString()
+    .padStart(2, "0")}:${date.getUTCSeconds().toString().padStart(2, "0")}Z`;
 
   res.status(200).json({
     slack_name: slack_name,
     current_day: day,
-    utc_time: utcTime,
+    utc_time: formattedUtcTime,
     track: track,
-    github_file_url: "",
-    github_repo_url: "",
+    github_file_url:
+      "https://github.com/Agu-Bright/HNGX-internship/blob/main/task1/app.js",
+    github_repo_url:
+      "https://github.com/Agu-Bright/HNGX-internship/tree/main/task1",
     status_code: 200,
   });
 });
