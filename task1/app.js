@@ -5,21 +5,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-function getUtcTimeWithValidation(date, range) {
-  //calculate the minimum and maximum valid time
-  const minimumTime = new Date();
-  minimumTime.setUTCHours(minimumTime.getUTCHours() - range);
-
-  const maximumTime = new Date();
-  maximumTime.setUTCHours(maximumTime.getUTCHours() + range);
-
-  if (range >= minimumTime && range <= maximumTime) {
-    console.log(date);
-    return date.toISOString();
-  } else {
-    return date.toISOString();
-  }
-}
 function getDayString(num) {
   switch (num) {
     case 0:
